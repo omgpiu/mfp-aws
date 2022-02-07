@@ -1,29 +1,51 @@
-  name:delpoy-container
+name: deploy-container
 
-  on:
-    push:
-      branches:
-        - master
+'on':
 
-  defaults:
-    run:
-      working-directory: packages/contaier
+  push:
 
-  jobs:
-    build:
-      name: Running Build
-      runs-on: ubuntu-latest
+    branches:
 
-      steps:
-        - uses: actions/checkout@v2
-        - name: Install
-          run: npm install
-        - name: Build
-          run: npm run build
+      - main
 
-        - uses: chrislennon/action-aws-cli@v1.1
-        - name: Connect to AWS
-          run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
-          env:
-            AWS_ACCESS_KEY_ID:${{ secrets.AWS.ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - master
+
+defaults:
+
+  run:
+
+    working-directory: packages/container
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+
+        with:
+
+          node-version: '12'
+
+      - run: npm install
+
+      - run: npm run build
+
+      - uses: chrislennon/action-aws-cli@v1.1
+
+      - run: >-
+
+          aws s3 sync dist s3://${‌{ secrets.AWS_S3_BUCKET_NAME
+
+          }}/container/latest
+
+        env:
+
+          AWS_ACCESS_KEY_ID: '${‌{ secrets.AWS_SECRET_ACCESS_KEY_ID }}'
+
+          AWS_SECRET_ACCESS_KEY: '${‌{ secrets.AWS_SECRET_ACCESS_KEY }}'
