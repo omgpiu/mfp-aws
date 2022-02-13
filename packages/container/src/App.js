@@ -1,12 +1,19 @@
 import React from 'react'
 import MarketingApp from "./components/MarketingApp";
+import Header from "./components/Header";
+import { BrowserRouter } from "react-router-dom";
 
-
+const generateClassName = createGenerateClassName({
+    productionPrefix: 'ct'
+})
 const App = () => {
-    return <div>
-        <h2>Hehey</h2>
-        <MarketingApp/>
-    </div>
+    return (
+        <BrowserRouter>
+            <div>
+                <Header/>
+                <MarketingApp/>
+            </div>
+        </BrowserRouter>)
 }
 
 export default App
