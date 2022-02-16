@@ -8,7 +8,7 @@ import Pricing from "../components/Pricing";
 
 
 const generateClassName = createGenerateClassName({
-    productionPrefix: 'ma'
+    productionPrefix: 'ma1'
 })
 
 
