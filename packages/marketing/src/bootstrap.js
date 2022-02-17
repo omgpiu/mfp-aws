@@ -2,9 +2,10 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import { createMemoryHistory, } from 'history'
 import App from "./App";
-const history = createMemoryHistory()
-const mount = (devRoot, { onNavigate }) => {
 
+
+const mount = (devRoot, { onNavigate }) => {
+    const history = createMemoryHistory()
     if (onNavigate) {
         history.listen(onNavigate)
     }
@@ -12,18 +13,16 @@ const mount = (devRoot, { onNavigate }) => {
         <App history={history}/>,
         devRoot
     )
-    return {
-        onParentNavigate({ pathname: nextPathName }) {
-
+    return ({
+        onParentNavigate: ({ pathname: nextPathName }) => {
             const { pathname } = history.location
             if (pathname !== nextPathName) {
-                console.log(history)
-                debugger
-                location.push(nextPathName)
+                history.push(nextPathName)
             }
         }
-    }
+    })
 }
+
 if (process.env.NODE_ENV === 'development') {
     const devRoot = document.querySelector('#_marketing-dev-root')
     if (devRoot) {

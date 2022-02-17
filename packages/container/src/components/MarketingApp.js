@@ -5,8 +5,7 @@ import { useHistory } from "react-router-dom";
 //В МФЕ мы хотим иметь минимальную связанность кода, поэтмо мы не берем с мфе напрямую компоненты, а работаем с функциям
 // Эта обертка позволяет превратить функцию маунт в Компонент
 
-
-const MarketingApp = () => {
+export default () => {
     const ref = useRef(null)
     const history = useHistory();
 
@@ -15,14 +14,15 @@ const MarketingApp = () => {
             onNavigate: ({ pathname: nextPathName }) => {
                 const { pathname } = history.location
                 if (pathname !== nextPathName) {
+                    console.log('Makerting', pathname, nextPathName)
+
                     history.push(nextPathName)
                 }
-            }
-        })
+            },
+        });
         history.listen(onParentNavigate)
-    }, [])
+    },[])
 
 
     return <div ref={ref}/>
 }
-export default MarketingApp
