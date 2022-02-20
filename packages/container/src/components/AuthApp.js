@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 //В МФЕ мы хотим иметь минимальную связанность кода, поэтмо мы не берем с мфе напрямую компоненты, а работаем с функциям
 // Эта обертка позволяет превратить функцию маунт в Компонент
 
-export default () => {
+export default ({ onSignIn }) => {
     const ref = useRef(null)
     const history = useHistory();
 
@@ -18,6 +18,7 @@ export default () => {
                     history.push(nextPathName)
                 }
             },
+            onSignIn
         });
         history.listen(onParentNavigate)
     }, [])
