@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { mount } from 'marketing/Marketing'
+import { mount } from 'auth/AuthApp'
 import { useHistory } from "react-router-dom";
 
 //В МФЕ мы хотим иметь минимальную связанность кода, поэтмо мы не берем с мфе напрямую компоненты, а работаем с функциям
